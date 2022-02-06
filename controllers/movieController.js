@@ -1,22 +1,15 @@
-const pool = require("../db");
-var format = require('pg-format');
+const config = require("../db");
+const sql = require('mssql');
+
 
 const allMovies = async (req, res) => {
     try {
-        const result = await pool.query(
-            "SELECT * FROM film"
-        );
-
-
-        if (!result.rows) return res.json({
-            error: {
-                status: 400,
-            }
-        });
-
-        res.json(result.rows);
-    } catch (err) {
-        console.error(err.message);
+        let pool = await sql.connect(config);
+        let products = await pool.request().query("SELECT * from cinema");
+        res.json(products.recordsets);
+    }
+    catch (error) {
+        console.log(error);
     }
 }
 
