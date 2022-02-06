@@ -77,7 +77,7 @@ const updateMovie = async (req, res) => {
 const deleteMovie = async (req, res) => {
     const id = parseInt(req.params.id);
     try {
-        const result = await pool.query('DELETE FROM film WHERE film_id = $1', [id]);
+        const result = await pool.query('DELETE FROM movie WHERE MOVIE_ID = $1', [id]);
         res.json(result.rows[0]);
     } catch (err) {
         console.error(err.message);

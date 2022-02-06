@@ -6,6 +6,7 @@ const pool = require("./db");
 
 //routes
 const movie = require("./routes/Movie")
+const city = require("./routes/City")
 
 app.use(cors());
 app.use(express.json())
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/movies", movie)
+app.use("/city", city)
 
 
 
