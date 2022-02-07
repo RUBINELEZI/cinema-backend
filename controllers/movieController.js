@@ -35,14 +35,13 @@ const addMovie = async (req, res) => {
         let pool = await sql.connect(config);
         
         const result = await pool.request()
-        .input('MOVIE_ID',  body.MOVIE_ID)
         .input('MOVIE_TITLE',  body.MOVIE_TITLE)
         .input('MOVIE_YEAR', body.MOVIE_YEAR)
         .input('MOVIE_DESCRIPTION',  body.MOVIE_DESCRIPTION)
         .input('MOVIE_DURATION', body.MOVIE_DURATION)
         .input('MOVIE_FORMAT', body.MOVIE_FORMAT)
         .input('MOVIE_AUDIENCE', body.MOVIE_AUDIENCE)
-        .query('INSERT INTO MOVIE(MOVIE_ID, MOVIE_TITLE, MOVIE_YEAR, MOVIE_DESCRIPTION, MOVIE_DURATION, MOVIE_FORMAT, MOVIE_AUDIENCE) VALUES (@MOVIE_ID, @MOVIE_TITLE, @MOVIE_YEAR, @MOVIE_DESCRIPTION, @MOVIE_DURATION, @MOVIE_FORMAT, @MOVIE_AUDIENCE)');
+        .query('INSERT INTO MOVIE(MOVIE_TITLE, MOVIE_YEAR, MOVIE_DESCRIPTION, MOVIE_DURATION, MOVIE_FORMAT, MOVIE_AUDIENCE) VALUES (@MOVIE_TITLE, @MOVIE_YEAR, @MOVIE_DESCRIPTION, @MOVIE_DURATION, @MOVIE_FORMAT, @MOVIE_AUDIENCE)');
         
         res.json("Succesfully added");
     } catch (err) {
@@ -59,7 +58,6 @@ const updateMovie = async (req, res) => {
         const id = parseInt(req.params.id);
 
         const result = await pool.request()
-        .input('MOVIE_ID',  body.MOVIE_ID)
         .input('MOVIE_TITLE',  body.MOVIE_TITLE)
         .input('MOVIE_YEAR', body.MOVIE_YEAR)
         .input('MOVIE_DESCRIPTION',  body.MOVIE_DESCRIPTION)

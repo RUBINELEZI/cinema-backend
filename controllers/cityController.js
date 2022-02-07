@@ -35,10 +35,9 @@ const addCity = async (req, res) => {
         let pool = await sql.connect(config);
         
         const result = await pool.request()
-        .input('CITY_ID',  body.CITY_ID)
         .input('CITY_NAME',  body.CITY_NAME)
         .input('CITY_ZIP', body.CITY_ZIP)
-        .query('INSERT INTO CITY(CITY_ID, CITY_NAME, CITY_ZIP) VALUES (@CITY_ID, @CITY_NAME, @CITY_ZIP)');
+        .query('INSERT INTO CITY(CITY_NAME, CITY_ZIP) VALUES (@CITY_NAME, @CITY_ZIP)');
         
         res.json("Succesfully added");
     } catch (err) {
@@ -55,7 +54,6 @@ const updateCity = async (req, res) => {
         const id = parseInt(req.params.id);
 
         const result = await pool.request()
-        .input('CITY_ID',  body.CITY_ID)
         .input('CITY_NAME',  body.CITY_NAME)
         .input('CITY_ZIP', body.CITY_ZIP)
         .query(`UPDATE city SET CITY_NAME = @CITY_NAME, CITY_ZIP = @CITY_ZIP WHERE CITY_ID = ${id}`);
